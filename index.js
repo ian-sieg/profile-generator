@@ -6,6 +6,7 @@ const fs = require('fs')
 
 const staff = []
 
+function anotherStaff() {
 inquirer
     .prompt([
         {
@@ -75,9 +76,23 @@ inquirer
                 }
             ])
             .then (({special, more}) => {
+                let newStaff;
                 if (role === 'Intern') {
-                    let newStaff = new Intern(name, email, id, special)
-                    console.log(newStaff)
-                }
+                    newStaff = new Intern(name, email, id, special)
+                } else if (role === 'Engineer') {
+                    newStaff = new Engineer(name, email, id, special)
+                } else {
+                    newStaff = new Manager(name, email, id, special)
+                };
+
+                staff.push(newStaff)
+                console.log(staff)
+                more === 'Yes' ? anotherStaff() : printPage();
             })
     })
+}
+
+anotherStaff()
+
+//TODO
+// add printPage function to create the actual HTML with input from staff array
