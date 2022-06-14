@@ -4,6 +4,7 @@ const printPage = require('./src/htmlGen')
 const Manager = require('./lib/manager')
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
+const { exit } = require('process')
 
 const staff = []
 
@@ -88,7 +89,7 @@ inquirer
     })
 }
 
-function teamBoss() {
+function teamBuild() {
     inquirer
         .prompt([
             {
@@ -146,7 +147,8 @@ function teamBoss() {
                 choices: ['Add more team members', 'Finished'],
             }
         ])
-        .then(({role, name, email, id, office, newMem}) => {
+        .then(({name, email, id, office, newMem}) => {
+            role = 'Manager'
             let newMngr = new Manager(role, name, email, id, office)
             staff.push(newMngr)
 
@@ -154,7 +156,7 @@ function teamBoss() {
         })
 }
 
-teamBoss();
+teamBuild();
 
 //TODO
 // add printPage function to create the actual HTML with input from staff array
