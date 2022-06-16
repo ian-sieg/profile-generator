@@ -1,5 +1,5 @@
 const inquirer = require('inquirer')
-const printPage = require('./src/htmlGen')
+const htmlGen = require('./src/htmlGen')
 
 const Manager = require('./lib/manager')
 const Engineer = require('./lib/engineer')
@@ -84,7 +84,7 @@ inquirer
                 };
 
                 staff.push(newStaff)
-                more === 'Yes' ? anotherStaff() : printPage(staff);
+                more === 'Yes' ? anotherStaff() : htmlGen.emplCard(staff);
             })
     })
 }
@@ -152,11 +152,8 @@ function teamBuild() {
             let newMngr = new Manager(role, name, email, id, office)
             staff.push(newMngr)
 
-            newMem === 'Finished' ? printPage(staff) : anotherStaff();
+            newMem === 'Finished' ? htmlGen.emplCard(staff) : anotherStaff();
         })
 }
 
 teamBuild();
-
-//TODO
-// add printPage function to create the actual HTML with input from staff array

@@ -1,7 +1,13 @@
 const fs = require('fs')
 
-function printPage(staff) {
-    console.log(staff)
+emplCard = (staff) => {
+    for (let i = 0; i < staff.length; i++) {
+        console.log(staff[i].name)
+    }
 }
 
-module.exports = printPage
+mainHtml = () => {
+    `to be added from index.html`;
+}
+
+module.exports = {emplCard, mainHtml}
