@@ -1,52 +1,19 @@
 const fs = require('fs')
 
-newManager = (staff) => {
-    return `<div class="row justify-content-center">
-    <div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
+newStaff = (staff) => {
+    return `<div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
         <div class="card-header text-bg-warning">
             <h3>${staff.name}</h3>
-            <h5><i class="fa-solid fa-mug-hot"></i> ${staff.role}</h5>
+            <h5><i class="fa-solid ${staff.icon}"></i> ${staff.role}</h5>
         </div>
         <div class="card-body text-bg-light">
             <ul class="list-group list-group pt-2">
                 <li class="list-group-item">ID: ${staff.id}</li>
                 <li class="list-group-item">Email: <a href="mailto:${staff.email}">${staff.email}</a></li>
-                <li class="list-group-item">Office Number: ${staff.special}</li>
+                ${staff.specLine}
             </ul>
         </div>
     </div>`;
-}
-
-newEngineer = (staff) => {
-    return `<div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
-    <div class="card-header text-bg-warning">
-        <h3>${staff.name}</h3>
-        <h5><i class="fa-solid fa-gear"></i> ${staff.role}</h5>
-    </div>
-    <div class="card-body text-bg-light">
-        <ul class="list-group list-group pt-2">
-            <li class="list-group-item">ID: ${staff.id}</li>
-            <li class="list-group-item">Email: <a href="mailto:${staff.email}">${staff.email}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${staff.special}">${staff.special}</a></li>
-        </ul>
-    </div>
-</div>`;
-}
-
-newIntern = (staff) => {
-    return `<div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
-    <div class="card-header text-bg-warning">
-        <h3>${staff.name}</h3>
-        <h5><i class="fa-solid fa-graduation-cap"></i> ${staff.role}</h5>
-    </div>
-    <div class="card-body text-bg-light">
-        <ul class="list-group list-group pt-2">
-            <li class="list-group-item">ID: ${staff.id}</li>
-            <li class="list-group-item">Email: <a href="mailto:${staff.email}">${staff.email}</a></li>
-            <li class="list-group-item">School: ${staff.special}</a></li>
-        </ul>
-    </div>
-</div>`;
 }
 
 makeTeam = (staff) => {
@@ -56,15 +23,16 @@ makeTeam = (staff) => {
         const employee = staff[i];
 
         if (employee.role === 'Manager') {
-            let managerCard = newManager(employee)
-            staffArr.push(managerCard)
+            employee.icon = 'fa-mug-hot'
+            employee.specLine = `<li class="list-group-item">Office Number: ${employee.special}</li>`;
         } else if (employee.role === 'Engineer') {
-            let engineerCard = newEngineer(employee)
-            staffArr.push(engineerCard)
+            employee.icon = 'fa-gear'
+            employee.specLine = `<li class="list-group-item">GitHub: <a href="https://github.com/${employee.special}" target="_blank">${employee.special}</a></li>`
         } else {
-            let internCard = newIntern(employee)
-            staffArr.push(internCard)
+            employee.icon = 'fa-graduation-cap'
+            employee.specLine = `<li class="list-group-item">School: ${employee.special}</a></li>`
         }
+        staffArr.push(newStaff(employee))
     }
 
     teamRoster = staffArr.join('')
@@ -86,9 +54,10 @@ mainHtml = (teamRoster) => {
             <div class="row bg-info rounded-bottom p-3 mb-2">
                 <h1 class="text-white text-center col">Team Roster</h1>
             </div>
+            <div class="row justify-content-center">
+                ${teamRoster}
+            </div>
         </div>
-
-        ${teamRoster}
 
     </body>
     </html>`;
