@@ -1,10 +1,9 @@
 const inquirer = require('inquirer')
-const htmlGen = require('./src/htmlGen')
+const makeTeam = require('./src/htmlGen')
 
 const Manager = require('./lib/manager')
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
-const { exit } = require('process')
 
 const staff = []
 
@@ -84,7 +83,7 @@ inquirer
                 };
 
                 staff.push(newStaff)
-                more === 'Yes' ? anotherStaff() : htmlGen.emplCard(staff);
+                more === 'Yes' ? anotherStaff() : makeTeam(staff);
             })
     })
 }
@@ -129,7 +128,7 @@ function teamBuild() {
                 },
             },
             {
-                name: 'office',
+                name: 'special',
                 message: 'What is their office number?',
                 validate: (ans) => {
                     if(ans !== '') {
@@ -147,12 +146,12 @@ function teamBuild() {
                 choices: ['Add more team members', 'Finished'],
             }
         ])
-        .then(({name, email, id, office, newMem}) => {
+        .then(({name, email, id, special, newMem}) => {
             role = 'Manager'
-            let newMngr = new Manager(role, name, email, id, office)
+            let newMngr = new Manager(role, name, email, id, special)
             staff.push(newMngr)
 
-            newMem === 'Finished' ? htmlGen.emplCard(staff) : anotherStaff();
+            newMem === 'Finished' ? makeTeam(staff) : anotherStaff();
         })
 }
 
