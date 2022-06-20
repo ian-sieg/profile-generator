@@ -1,21 +1,5 @@
 const fs = require('fs')
 
-newStaff = (staff) => {
-    return `<div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
-        <div class="card-header text-bg-warning">
-            <h3>${staff.name}</h3>
-            <h5><i class="fa-solid ${staff.icon}"></i> ${staff.role}</h5>
-        </div>
-        <div class="card-body text-bg-light">
-            <ul class="list-group list-group pt-2">
-                <li class="list-group-item">ID: ${staff.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${staff.email}">${staff.email}</a></li>
-                ${staff.specLine}
-            </ul>
-        </div>
-    </div>`;
-}
-
 makeTeam = (staff) => {
     let staffArr = [];
 
@@ -37,6 +21,22 @@ makeTeam = (staff) => {
 
     teamRoster = staffArr.join('')
     mainHtml(teamRoster);
+}
+
+newStaff = (staff) => {
+    return `<div class="card col-3 m-3" style="padding-left: 0; padding-right: 0;">
+        <div class="card-header text-bg-warning">
+            <h3>${staff.name}</h3>
+            <h5><i class="fa-solid ${staff.icon}"></i> ${staff.role}</h5>
+        </div>
+        <div class="card-body text-bg-light">
+            <ul class="list-group list-group pt-2">
+                <li class="list-group-item">ID: ${staff.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${staff.email}">${staff.email}</a></li>
+                ${staff.specLine}
+            </ul>
+        </div>
+    </div>`;
 }
 
 mainHtml = (teamRoster) => {
