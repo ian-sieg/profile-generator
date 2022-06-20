@@ -6,7 +6,7 @@ This application runs entirely in Node. It prompts the user with questions to ge
 
 ## Video Demo
 
-
+https://user-images.githubusercontent.com/98928887/174648726-2bc3b9d2-eb1b-4e5a-8849-584da242a06b.mp4
 
 ## Installation
 
@@ -19,3 +19,5 @@ Once installed, open your terminal or gitbash, navigate to the correct folder an
 ## Testing
 
 Download Jest by running 'npm install --save-dev jest' in the command line while inside the main project folder. Then run 'npm test' to test whether each class runs correctly.
+
+https://user-images.githubusercontent.com/98928887/174648754-e9c4d829-e58a-4895-aa5e-a2f820f2466c.mp4
